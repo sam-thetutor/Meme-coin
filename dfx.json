@@ -1,21 +1,14 @@
 {
   "canisters": {
-    "icrc1_ledger_canister_backend": {
-      "main": "src/icrc1_ledger_canister_backend/main.mo",
-      "type": "motoko"
+    "icrc1_ledger_canister": {
+      "type": "custom",
+      "candid": "https://raw.githubusercontent.com/dfinity/ic/63acf4f88b20ec0c6384f4e18f0f6f69fc5d9b9f/rs/rosetta-api/icrc1/ledger/ledger.did",
+      "wasm": "https://download.dfinity.systems/ic/63acf4f88b20ec0c6384f4e18f0f6f69fc5d9b9f/canisters/ic-icrc1-ledger.wasm.gz"
     },
-    "icrc1_ledger_canister_frontend": {
-      "dependencies": [
-        "icrc1_ledger_canister_backend"
-      ],
-      "frontend": {
-        "entrypoint": "src/icrc1_ledger_canister_frontend/src/index.html"
-      },
-      "source": [
-        "src/icrc1_ledger_canister_frontend/assets",
-        "dist/icrc1_ledger_canister_frontend/"
-      ],
-      "type": "assets"
+    "backend": {
+      "main": "src/icrc1_ledger_canister_backend/main.mo",
+      "type": "motoko",
+      "dependencies": ["icrc1_ledger_canister"]
     }
   },
   "defaults": {
