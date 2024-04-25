@@ -32,7 +32,5 @@ actor AUTODEPLOY={
     //return the canister id of the newly created token
     return #ok(Principal.toText(principalID));
   }
-
-
 }
   
