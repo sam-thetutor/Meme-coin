@@ -10,9 +10,11 @@ actor AUTODEPLOY={
 
   //function to deploy the token canister
 
-  public shared({caller}) func deployToken(_name:Text,_symbol:Text,_transferFee:Nat): async Result.Result<Text,Text>{
+  public shared({caller}) func deployToken(_name:Text,_symbol:Text,_transferFee:Nat,_decimals:Nat): async Result.Result<Text,Text>{
 
+//add the cycles to cater for the canister creation
         Cycles.add(1000000000000);
+        //create a token instance class with the
     let myToken = await TokenClass.Ledger(
       {
           initial_mints = [];
@@ -22,12 +24,12 @@ actor AUTODEPLOY={
           };
           token_name = _name;
           token_symbol = _symbol;
-          decimals = 8;
+          decimals = _decimals;
           transfer_fee = _transferFee;
         }
-      
       );
     let principalID = Principal.fromActor(myToken);
+    //return the canister id of the newly created token
     return #ok(Principal.toText(principalID));
   }
 
